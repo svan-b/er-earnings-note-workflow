@@ -433,11 +433,11 @@ flowchart TD
 
 ## Usage
 
-**GitHub** -- Push this `README.md` for native Mermaid rendering with capability colors.
+**GitHub** -- Push this README.md for native Mermaid rendering with capability colors.
 
-**Interactive** -- Paste individual charts at [mermaid.live](https://mermaid.live) or use the raw `.mermaid` file.
+**Interactive** -- Paste individual charts at [mermaid.live](https://mermaid.live) or use the raw .mermaid file.
 
-**Presentation** -- Open `er_earnings_note_v3_0.html` for the light-mode presentation version with copy buttons.
+**Presentation** -- Open er_earnings_note_v3_0.html for the light-mode presentation version with copy buttons.
 
 ---
 
