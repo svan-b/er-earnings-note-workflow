@@ -1,0 +1,268 @@
+%% ============================================================
+%% ER Earnings Note Production Workflow v3.0
+%% Raw Mermaid Source -- Each chart as a separate block
+%% Paste individual blocks into mermaid.live for rendering
+%% ============================================================
+
+
+%% Chart 1: Overview -- End-to-End Flow with Linked Model Refresh
+flowchart LR
+  classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+  classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+  classDef red fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+  classDef linked fill:#6B4C9A,stroke:#6B4C9A,color:#FFFFFF,stroke-width:2px
+
+  Ch1["Ch 1: Pre-Earnings"]:::green
+  Ch2["Ch 2: Release"]:::green
+  Ch3["Ch 3: Conference Call"]:::yellow
+  Ch4["Ch 4: Judgment"]:::red
+  Ch5["Ch 5: Note Assembly"]:::green
+  Ch6["Ch 6: Publish"]:::red
+  MR["Model Refresh"]:::linked
+
+  Ch1 --> Ch2 --> Ch3 --> Ch4 --> Ch5 --> Ch6
+  Ch2 -.-> MR
+  Ch3 -.-> MR
+  MR -.-> Ch4
+  MR -.-> Ch5
+
+
+%% ============================================================
+%% Chart 2: Chapter 1 -- Pre-Earnings Setup
+flowchart TD
+  classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+  classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+  classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
+
+  TITLE["Chapter 1: Pre-Earnings Setup"]:::phase
+
+  S1["Step 1: Confirm Earnings Logistics"]:::phase
+  TITLE --> S1
+  N1a["1a: Confirm earnings date, time, release format"]:::green
+  N1b["1b: Confirm conference call time and access details"]:::green
+  S1 --> N1a --> N1b
+
+  S2["Step 2: Consensus Preparation"]:::phase
+  N1b --> S2
+  N2a["2a: Source consensus: terminal pull or issuer-distributed survey"]:::yellow
+  N2b["2b: Validate quality: contributor count, recency, outlier check"]:::yellow
+  N2c["2c: Record consensus for each key metric"]:::green
+  S2 --> N2a --> N2b --> N2c
+
+  S3["Step 3: Internal Estimates"]:::phase
+  N2c --> S3
+  N3a["3a: Pull internal model estimates for current quarter"]:::green
+  S3 --> N3a
+
+  S4["Step 4: Template Setup"]:::phase
+  N3a --> S4
+  N4a["4a: Prepare note template with prior period comparatives"]:::green
+  S4 --> N4a
+
+
+%% ============================================================
+%% Chart 3: Chapter 2 -- Earnings Release Processing
+flowchart TD
+  classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+  classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+  classDef red fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+  classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
+  classDef dec fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+
+  TITLE["Chapter 2: Earnings Release Processing"]:::phase
+
+  S5["Step 5: Data Extraction"]:::phase
+  TITLE --> S5
+  N5a["5a: Extract headline financial metrics from press release"]:::green
+  N5b["5b: Extract segment and operating metrics"]:::green
+  S5 --> N5a --> N5b
+
+  S6["Step 6: Variance Analysis"]:::phase
+  N5b --> S6
+  N6a["6a: Compute actuals vs consensus for each metric"]:::green
+  N6b["6b: Compute actuals vs internal model estimates"]:::green
+  N6c["6c: Classify each metric: beat, miss, or inline"]:::green
+  S6 --> N6a --> N6b --> N6c
+
+  S7["Step 7: Initial Assessment"]:::phase
+  N6c --> S7
+  N7a["7a: Assess surprise magnitude and direction"]:::yellow
+  N7b["7b: Flag items requiring immediate attention"]:::yellow
+  S7 --> N7a --> N7b
+
+  D1{"Flash note warranted?"}:::dec
+  N7b --> D1
+  D1 -- Yes --> FL["Draft and publish flash note"]:::red
+  D1 -- No --> NXT["Proceed to conference call"]:::green
+  FL --> NXT
+
+
+%% ============================================================
+%% Chart 4: Chapter 3 -- Conference Call
+flowchart TD
+  classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+  classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+  classDef red fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+  classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
+
+  TITLE["Chapter 3: Conference Call"]:::phase
+
+  S8["Step 8: Call Processing"]:::phase
+  TITLE --> S8
+  N8a["8a: Capture prepared remarks and key disclosures"]:::yellow
+  N8b["8b: Capture analyst questions and management responses"]:::yellow
+  N8c["8c: Assess management tone and credibility"]:::red
+  S8 --> N8a --> N8b --> N8c
+
+  S9["Step 9: Call Synthesis"]:::phase
+  N8c --> S9
+  N9a["9a: Document guidance changes and operational commentary"]:::yellow
+  N9b["9b: Identify insights that affect forward view or assumptions"]:::yellow
+  S9 --> N9a --> N9b
+
+
+%% ============================================================
+%% Chart 5: Model Refresh -- Linked Process
+flowchart TD
+  classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+  classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+  classDef red fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+  classDef linked fill:#6B4C9A,stroke:#6B4C9A,color:#FFFFFF,stroke-width:2px
+  classDef input fill:#E8E5DD,stroke:#847E76,color:#2C2926,stroke-width:2px
+
+  TITLE["Model Refresh: Linked Process"]:::linked
+
+  IN1["Input: Actuals from earnings release"]:::input
+  TITLE --> IN1
+  IN1 --> M1["M1: Enter reported actuals into model"]:::yellow
+  M1 --> M2["M2: Incorporate guidance revisions if any"]:::yellow
+
+  IN2["Input: Insights from conference call"]:::input
+  IN2 --> M3
+
+  M2 --> M3["M3: Analyst revises forward assumptions"]:::red
+  M3 --> M4["M4: Update forward quarter and full-year estimates"]:::yellow
+  M4 --> M5["M5: Recompute valuation outputs"]:::green
+  M5 --> M6["M6: Model checkpoint confirmed"]:::yellow
+  M6 --> OUT["Output: Refreshed estimates and valuation"]:::linked
+
+
+%% ============================================================
+%% Chart 6: Chapter 4 -- Analyst Judgment
+flowchart TD
+  classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+  classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+  classDef red fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+  classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
+  classDef decR fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+
+  TITLE["Chapter 4: Analyst Judgment"]:::phase
+
+  S10["Step 10: Model Review"]:::phase
+  TITLE --> S10
+  N10a["10a: Review refreshed estimates and valuation impact"]:::green
+  S10 --> N10a
+
+  S11["Step 11: Thesis and Rating"]:::phase
+  N10a --> S11
+  N11a["11a: Synthesize all inputs: results, call, model, market context"]:::red
+  N11b["11b: Thesis assessment: intact, strengthened, or weakened"]:::red
+  S11 --> N11a --> N11b
+
+  D3{"Rating change warranted?"}:::decR
+  N11b --> D3
+  D3 -- Yes --> N11c["11c: Document rating change with rationale"]:::red
+  D3 -- No --> N11d["11d: Confirm rating maintained with rationale"]:::red
+
+  S12["Step 12: Target Price"]:::phase
+  N11c --> S12
+  N11d --> S12
+  D4{"Target price change warranted?"}:::decR
+  S12 --> D4
+  D4 -- Yes --> N12a["12a: Confirm or adjust target from refreshed model"]:::yellow
+  D4 -- No --> N12b["12b: Confirm target price maintained"]:::red
+
+  S13["Step 13: Note Positioning"]:::phase
+  N12a --> S13
+  N12b --> S13
+  N13a["13a: Determine note positioning and key message"]:::red
+  N13b["13b: Select optional note components to include"]:::red
+  S13 --> N13a --> N13b
+
+
+%% ============================================================
+%% Chart 7: Chapter 5 -- Note Assembly
+flowchart TD
+  classDef green fill:#C6EFCE,stroke:#006100,color:#006100,stroke-width:2px
+  classDef yellow fill:#FFEB9C,stroke:#9C6500,color:#9C6500,stroke-width:2px
+  classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
+  classDef linked fill:#6B4C9A,stroke:#6B4C9A,color:#FFFFFF,stroke-width:2px
+
+  TITLE["Chapter 5: Note Assembly"]:::phase
+
+  subgraph REQ["Required Components"]
+    direction TB
+    N14a["14a: Populate header block"]:::green
+    N15a["15a: Draft key takeaways"]:::yellow
+    N16a["16a: Build results vs estimates table"]:::green
+    N16b["16b: Draft variance commentary"]:::yellow
+    N17a["17a: Build estimate revision table"]:::green
+    N18a["18a: Generate financial model exhibit"]:::green
+    N19a["19a: Assemble disclosures"]:::green
+    N14a --> N15a --> N16a --> N16b --> N17a --> N18a --> N19a
+  end
+
+  TITLE --> N14a
+
+  subgraph OPT["Optional: Analyst Selects"]
+    direction TB
+    OHEAD["Selected in Ch 4, Step 13b"]:::linked
+    N20a["20a: Segment detail with call context"]:::yellow
+    N20b["20b: Guidance update section"]:::yellow
+    N20c["20c: Outlook revision commentary"]:::yellow
+    N21a["21a: Valuation methodology detail"]:::green
+    N21b["21b: Model cover page"]:::green
+    N21c["21c: Comparable companies sheet"]:::green
+    N21d["21d: Custom charts and exhibits"]:::green
+    OHEAD --> N20a
+    OHEAD --> N20b
+    OHEAD --> N20c
+    OHEAD --> N21a
+    OHEAD --> N21b
+    OHEAD --> N21c
+    OHEAD --> N21d
+  end
+
+  N19a --> COMPILE["Compile and order earnings note"]:::green
+  N20a --> COMPILE
+  N20b --> COMPILE
+  N20c --> COMPILE
+  N21a --> COMPILE
+  N21b --> COMPILE
+  N21c --> COMPILE
+  N21d --> COMPILE
+
+
+%% ============================================================
+%% Chart 8: Chapter 6 -- Review and Publication
+flowchart TD
+  classDef red fill:#FFC7CE,stroke:#9C0006,color:#9C0006,stroke-width:2px
+  classDef phase fill:#2E4057,stroke:#2E4057,color:#FFFFFF,stroke-width:2px
+  classDef publish fill:#9C0006,stroke:#9C0006,color:#FFFFFF,stroke-width:2px
+
+  TITLE["Chapter 6: Review and Publication"]:::phase
+
+  S22["Step 22: Analyst Review"]:::phase
+  TITLE --> S22
+  N22a["22a: Final review of all numbers, commentary, and positioning"]:::red
+  S22 --> N22a
+
+  S23["Step 23: Compliance"]:::phase
+  N22a --> S23
+  N23a["23a: Compliance review and approval"]:::red
+  S23 --> N23a
+
+  S24["Step 24: Publication"]:::phase
+  N23a --> S24
+  N24a["24a: Publish earnings note to clients"]:::publish
+  S24 --> N24a
